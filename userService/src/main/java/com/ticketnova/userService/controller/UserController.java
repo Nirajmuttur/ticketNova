@@ -3,8 +3,10 @@ package com.ticketnova.userService.controller;
 import com.ticketnova.userService.dto.UserCreationDto;
 import com.ticketnova.userService.dto.UserDto;
 import com.ticketnova.userService.service.UserService;
+import com.ticketnova.userService.util.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +22,9 @@ public class UserController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<UserCreationDto> register(@RequestBody UserDto user){
+    public ResponseEntity<Response<UserCreationDto>> register(@RequestBody UserDto user){
         UserCreationDto newUser = userService.createUser(user);
-        return ResponseEntity.ok(newUser);
+        Response<UserCreationDto> response = Response.successfulResponse(HttpStatus.OK.value(), "User Created Successfully",newUser);
+        return ResponseEntity.ok(response);
     }
 }

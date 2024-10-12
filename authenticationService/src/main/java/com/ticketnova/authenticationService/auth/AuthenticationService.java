@@ -28,7 +28,6 @@ public class AuthenticationService {
 
     @KafkaListener(topics = "user-created",groupId = "user-service-group", containerFactory = "kafkaListenerContainerFactory")
     public void register(UserDto userDto) {
-        System.out.println("New User"+ userDto);
         var user = User.builder()
                         .id(userDto.getId())
                         .username(userDto.getUsername())
@@ -46,6 +45,7 @@ public class AuthenticationService {
         claims.put("email",user.getEmail());
         claims.put("id",user.getId());
         claims.put("username",user.getUsername());
+        System.out.println("user" + user);
         var jwtToken = jwtService.generateToken(claims,user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)

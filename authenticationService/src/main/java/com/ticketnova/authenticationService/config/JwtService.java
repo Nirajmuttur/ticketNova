@@ -70,7 +70,10 @@ public class JwtService {
     }
 
     private Key getSignInKey() {
+        System.out.println("Inside getSignInKey");
+        System.out.println(appConfigReader.getSecret());
         byte[] keyBytes = Decoders.BASE64.decode(appConfigReader.getSecret());
+        System.out.println("Outside getSignInKey");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
