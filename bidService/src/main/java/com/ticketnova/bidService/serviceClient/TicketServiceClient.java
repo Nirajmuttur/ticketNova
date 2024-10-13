@@ -21,7 +21,7 @@ public class TicketServiceClient {
     private final RestTemplate restTemplate;
 
     public TicketApiResponse<TicketDTO> getTicket(UUID ticketId){
-        String url = "http://localhost:8084/api/v1/ticket/" + ticketId;
+        String url = "http://ticket-service:8084/api/v1/ticket/" + ticketId;
         ResponseEntity<TicketApiResponse<TicketDTO>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<TicketApiResponse<TicketDTO>>() {});
         TicketApiResponse<TicketDTO> response = responseEntity.getBody();
         return response;
