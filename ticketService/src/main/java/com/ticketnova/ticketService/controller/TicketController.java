@@ -23,7 +23,7 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
-    @PostMapping("/register")
+    @PostMapping("/create")
     public ResponseEntity<Response<Ticket>> register(@Valid @RequestBody TicketDTO ticketDTO){
         Ticket ticket = ticketService.createTicket(ticketDTO);
         Response<Ticket> response = Response.successfulResponse("Ticket created successfully", ticket);

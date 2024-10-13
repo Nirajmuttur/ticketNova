@@ -27,7 +27,7 @@ public class BidController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Response<Bids>> updateBid(@Valid @RequestBody BidDTO bidDTO, @PathVariable UUID id){
         Bids bid = bidService.updateBid(bidDTO,id);
         Response<Bids> response = Response.successfulResponse("Bid updated successfully", bid);
